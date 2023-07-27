@@ -13,6 +13,6 @@ public class StudentDTO {
 
     private String name;
     private Stream<String> lessons;
-    private Stream<Double> notes;
+    private Stream<NoteDTO> notes;
 
 }

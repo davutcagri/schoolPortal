@@ -1,5 +1,6 @@
 package davutcagri.schoolPortal.service;
 
+import davutcagri.schoolPortal.dto.NoteDTO;
 import davutcagri.schoolPortal.dto.StudentDTO;
 import davutcagri.schoolPortal.model.Lesson;
 import davutcagri.schoolPortal.model.Note;
@@ -33,7 +34,13 @@ public class StudentService {
             StudentDTO studentDTO = new StudentDTO();
             studentDTO.setName(student.getName());
             studentDTO.setLessons(student.getLessons().stream().map(Lesson::getName));
-            studentDTO.setNotes(student.getNotes().stream().map(Note::getMark));
+            studentDTO.setNotes(student.getNotes().stream().map(note -> {
+                NoteDTO noteDTO = new NoteDTO();
+                noteDTO.setMark(note.getMark());
+                noteDTO.setStudentName(note.getStudent().getName());
+                noteDTO.setLessonName(note.getLesson().getName());
+                return noteDTO;
+            }));
             return studentDTO;
         });
     }
@@ -47,7 +54,13 @@ public class StudentService {
         StudentDTO studentDTO = new StudentDTO();
         studentDTO.setName(student.getName());
         studentDTO.setLessons(student.getLessons().stream().map(Lesson::getName));
-        studentDTO.setNotes(student.getNotes().stream().map(Note::getMark));
+        studentDTO.setNotes(student.getNotes().stream().map(note -> {
+            NoteDTO noteDTO = new NoteDTO();
+            noteDTO.setMark(note.getMark());
+            noteDTO.setStudentName(note.getStudent().getName());
+            noteDTO.setLessonName(note.getLesson().getName());
+            return noteDTO;
+        }));
         return studentDTO;
     }
 
