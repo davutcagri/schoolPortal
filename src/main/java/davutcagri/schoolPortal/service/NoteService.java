@@ -4,8 +4,6 @@ import davutcagri.schoolPortal.model.Note;
 import davutcagri.schoolPortal.repository.NoteRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class NoteService {
 

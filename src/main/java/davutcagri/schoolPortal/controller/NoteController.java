@@ -1,7 +1,6 @@
 package davutcagri.schoolPortal.controller;
 
 import davutcagri.schoolPortal.model.Note;
-import davutcagri.schoolPortal.response.GenericResponse;
 import davutcagri.schoolPortal.service.NoteService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -1,6 +1,5 @@
 package davutcagri.schoolPortal.dto;
 
-import davutcagri.schoolPortal.model.Teacher;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
