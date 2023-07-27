@@ -18,8 +18,11 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String email;
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.REMOVE)
     private List<Lesson> lessons = new ArrayList<Lesson>();
+
+    public void addLesson(Lesson lesson) {
+        this.lessons.add(lesson);
+    }
 
 }

@@ -1,41 +1,54 @@
 package davutcagri.schoolPortal.service;
 
+import davutcagri.schoolPortal.dto.StudentDTO;
+import davutcagri.schoolPortal.model.Lesson;
+import davutcagri.schoolPortal.model.Note;
 import davutcagri.schoolPortal.model.Student;
-import davutcagri.schoolPortal.model.Teacher;
+import davutcagri.schoolPortal.repository.LessonRepository;
 import davutcagri.schoolPortal.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.stream.Stream;
 
 @Service
 public class StudentService {
 
     private final StudentRepository studentRepository;
+    private final LessonRepository lessonRepository;
 
-    public StudentService(StudentRepository studentRepository) {
+    public StudentService(StudentRepository studentRepository, LessonRepository lessonRepository) {
         this.studentRepository = studentRepository;
+        this.lessonRepository = lessonRepository;
     }
 
-    public void saveStudent(Student student) {
-        Optional<Student> studentDB = studentRepository.findStudentByEmail(student.getEmail());
-        if(!studentDB.isPresent()) {
-            studentRepository.save(student);
-        }
-    }
-
-    public List<Student> findAll() {
-        return studentRepository.findAll();
-    }
-
-    public Student getById(Long id, String newEmail) {
-        Student student = studentRepository.getById(id);
-        if(student == null) {
-            throw new IllegalStateException();
-        }
-        student.setEmail(newEmail);
+    public StudentDTO saveStudent(Student student) {
         studentRepository.save(student);
-        return student;
+        StudentDTO studentDTO = new StudentDTO();
+        studentDTO.setName(student.getName());
+        return studentDTO;
+    }
+
+    public Stream<StudentDTO> findAll() {
+        return studentRepository.findAll().stream().map(student -> {
+            StudentDTO studentDTO = new StudentDTO();
+            studentDTO.setName(student.getName());
+            studentDTO.setLessons(student.getLessons().stream().map(Lesson::getName));
+            studentDTO.setNotes(student.getNotes().stream().map(Note::getMark));
+            return studentDTO;
+        });
+    }
+
+    public StudentDTO addLesson(Long studentId, Long lessonId) {
+        Student student = studentRepository.getReferenceById(studentId);
+        Lesson lesson = lessonRepository.getReferenceById(lessonId);
+        student.addLesson(lesson);
+        studentRepository.save(student);
+
+        StudentDTO studentDTO = new StudentDTO();
+        studentDTO.setName(student.getName());
+        studentDTO.setLessons(student.getLessons().stream().map(Lesson::getName));
+        studentDTO.setNotes(student.getNotes().stream().map(Note::getMark));
+        return studentDTO;
     }
 
     public void delete(Long id) {

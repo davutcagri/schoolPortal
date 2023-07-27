@@ -19,10 +19,13 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String email;
     @ManyToMany
     private List<Lesson>lessons = new ArrayList<Lesson>();
     @OneToMany(mappedBy = "student")
     private List<Note> notes = new ArrayList<Note>();
+
+    public void addLesson(Lesson lesson) {
+        this.lessons.add(lesson);
+    }
 
 }

@@ -19,9 +19,8 @@ public class NoteController {
     }
 
     @PostMapping("/save")
-    public GenericResponse saveNote(@RequestBody Note note) {
+    public void saveNote(@RequestBody Note note) {
         noteService.saveNote(note);
-        return new GenericResponse("Note saved.");
     }
 
 }

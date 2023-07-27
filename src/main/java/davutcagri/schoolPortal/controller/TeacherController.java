@@ -1,6 +1,6 @@
 package davutcagri.schoolPortal.controller;
 
-import davutcagri.schoolPortal.dto.TeacherDto;
+import davutcagri.schoolPortal.dto.TeacherDTO;
 import davutcagri.schoolPortal.model.Teacher;
 import davutcagri.schoolPortal.response.GenericResponse;
 import davutcagri.schoolPortal.service.TeacherService;
@@ -19,25 +19,21 @@ public class TeacherController {
     }
 
     @PostMapping("/save")
-    public GenericResponse saveTeacher(@RequestBody Teacher teacher) {
-        teacherService.saveTeacher(teacher);
-        return new GenericResponse("Teacher saved.");
+    public TeacherDTO saveTeacher(@RequestBody Teacher teacher) {
+        return teacherService.saveTeacher(teacher);
     }
 
     @GetMapping("/findall")
-    public Stream<TeacherDto> findAll() {
-        return teacherService.findAll().stream().map(teacher -> {
-            return new TeacherDto(teacher);
-        });
+    public Stream<TeacherDTO> findAll() {//Stream kaldırılacak
+        return teacherService.findAll();
     }
 
-    @PutMapping("/{id:[0-9]+}/update/email")
-    public GenericResponse updateEmail(@PathVariable Long id, @RequestBody String newEmail) {
-        Teacher teacher = teacherService.updateEmail(id, newEmail);
-        return new GenericResponse("Teacher's email updated, new email: " + teacher.getEmail());
+    @PutMapping("/{id}/update/lesson")
+    public TeacherDTO updateLesson(@PathVariable Long id, @RequestBody String name) {
+        return teacherService.updateLesson(id, name);
     }
 
-    @DeleteMapping("/delete/{id:[0-9]+}")
+    @DeleteMapping("/delete/{id}")
     public GenericResponse deleteTeacher(@PathVariable Long id) {
         teacherService.delete(id);
         return new GenericResponse("Teacher deleted.");

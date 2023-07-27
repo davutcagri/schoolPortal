@@ -16,10 +16,7 @@ public class NoteService {
     }
 
     public void saveNote(Note note) {
-        Optional<Note> noteDB = noteRepository.findNoteByStudentAndLesson(note.getStudent(), note.getLesson());
-        if (!noteDB.isPresent()) {
-            noteRepository.save(note);
-        }
+        noteRepository.save(note);
     }
 
 }

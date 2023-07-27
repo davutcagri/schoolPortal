@@ -1,8 +1,7 @@
 package davutcagri.schoolPortal.controller;
 
-import davutcagri.schoolPortal.dto.StudentDto;
+import davutcagri.schoolPortal.dto.StudentDTO;
 import davutcagri.schoolPortal.model.Student;
-import davutcagri.schoolPortal.model.Teacher;
 import davutcagri.schoolPortal.response.GenericResponse;
 import davutcagri.schoolPortal.service.StudentService;
 import org.springframework.web.bind.annotation.*;
@@ -20,22 +19,18 @@ public class StudentController {
     }
 
     @PostMapping("/save")
-    public GenericResponse saveStudent(@RequestBody Student student) {
-        studentService.saveStudent(student);
-        return new GenericResponse("Student saved.");
+    public StudentDTO saveStudent(@RequestBody Student student) {
+        return studentService.saveStudent(student);
     }
 
     @GetMapping("/findall")
-    public Stream<StudentDto> findAll() {
-        return studentService.findAll().stream().map(student -> {
-            return new StudentDto(student);
-        });
+    public Stream<StudentDTO> findAll() {
+        return studentService.findAll();
     }
 
-    @PutMapping("/{id:[0-9]+}/update/email")
-    public GenericResponse updateEmail(@PathVariable Long id, @RequestBody String newEmail) {
-        Student student = studentService.getById(id, newEmail);
-        return new GenericResponse("Teacher's email updated, new email: " + student.getEmail());
+    @PutMapping("/{studentId}/add/lesson")
+    public StudentDTO addLesson(@PathVariable Long studentId, @RequestBody Long lessonId) {
+        return studentService.addLesson(studentId, lessonId);
     }
 
     @DeleteMapping("/delete/{id:[0-9]+}")

@@ -1,6 +1,6 @@
 package davutcagri.schoolPortal.controller;
 
-import davutcagri.schoolPortal.dto.LessonDto;
+import davutcagri.schoolPortal.dto.LessonDTO;
 import davutcagri.schoolPortal.model.Lesson;
 import davutcagri.schoolPortal.response.GenericResponse;
 import davutcagri.schoolPortal.service.LessonService;
@@ -19,22 +19,18 @@ public class LessonController {
     }
 
     @PostMapping("/save")
-    public GenericResponse saveLesson(@RequestBody Lesson lesson) {
-        lessonService.saveLesson(lesson);
-        return new GenericResponse("Lesson saved.");
+    public LessonDTO saveLesson(@RequestBody Lesson lesson) {
+        return lessonService.saveLesson(lesson);
     }
 
     @GetMapping("/findall")
-    public Stream<LessonDto> findAll() {
-        return lessonService.findAll().stream().map(lesson -> {
-            return new LessonDto(lesson);
-        });
+    public Stream<LessonDTO> findAll() {
+        return lessonService.findAll();
     }
 
     @PutMapping("/{lessonId:[0-9]+}/update/teacher")
-    public GenericResponse updateTeacher(@PathVariable Long lessonId, @RequestBody Long teacherId ) {
-        Lesson lesson = lessonService.updateTeacher(lessonId, teacherId);
-        return new GenericResponse("Lesson's teacher updated, new teacher: " + lesson.getTeacher().getName());
+    public LessonDTO updateTeacher(@PathVariable Long lessonId, @RequestBody Long teacherId ) {
+        return lessonService.updateTeacher(lessonId, teacherId);
     }
 
     @DeleteMapping("/delete/{id:[0-9]+}")
