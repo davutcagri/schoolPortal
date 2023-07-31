@@ -33,7 +33,7 @@ public class TeacherController {
         return teacherService.updateLesson(id, name);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}/delete")
     public GenericResponse deleteTeacher(@PathVariable Long id) {
         teacherService.delete(id);
         return new GenericResponse("Teacher deleted.");

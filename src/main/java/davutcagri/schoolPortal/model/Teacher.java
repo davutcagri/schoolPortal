@@ -21,8 +21,4 @@ public class Teacher {
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.REMOVE)
     private List<Lesson> lessons = new ArrayList<Lesson>();
 
-    public void addLesson(Lesson lesson) {
-        this.lessons.add(lesson);
-    }
-
 }

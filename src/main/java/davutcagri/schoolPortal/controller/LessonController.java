@@ -28,12 +28,12 @@ public class LessonController {
         return lessonService.findAll();
     }
 
-    @PutMapping("/{lessonId:[0-9]+}/update/teacher")
+    @PutMapping("/{lessonId}/update/teacher")
     public LessonDTO updateTeacher(@PathVariable Long lessonId, @RequestBody Long teacherId ) {
         return lessonService.updateTeacher(lessonId, teacherId);
     }
 
-    @DeleteMapping("/delete/{id:[0-9]+}")
+    @DeleteMapping("/{id}/delete")
     public GenericResponse delete(@PathVariable Long id) {
         lessonService.delete(id);
         return new GenericResponse("Lesson deleted.");

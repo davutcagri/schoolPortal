@@ -1,11 +1,12 @@
 package davutcagri.schoolPortal.controller;
 
+import davutcagri.schoolPortal.dto.NoteDTO;
 import davutcagri.schoolPortal.model.Note;
+import davutcagri.schoolPortal.response.GenericResponse;
 import davutcagri.schoolPortal.service.NoteService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/note")
@@ -20,6 +21,22 @@ public class NoteController {
     @PostMapping("/save")
     public void saveNote(@RequestBody Note note) {
         noteService.saveNote(note);
+    }
+
+    @GetMapping("/findall")
+    public Stream<NoteDTO> findAll() {
+        return noteService.findAll();
+    }
+
+    @PutMapping("/{id}/update/mark")
+    public NoteDTO updateMark(@PathVariable Long id, Double newMark) {
+        return noteService.updateMark(id, newMark);
+    }
+
+    @DeleteMapping("/{id}/delete")
+    public GenericResponse delete(@PathVariable Long id) {
+        noteService.delete(id);
+        return new GenericResponse("Note deleted.");
     }
 
 }
