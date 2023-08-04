@@ -6,7 +6,7 @@ import davutcagri.schoolPortal.response.GenericResponse;
 import davutcagri.schoolPortal.service.LessonService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.stream.Stream;
+import java.util.List;
 
 @RestController
 @RequestMapping("/lesson")
@@ -24,7 +24,7 @@ public class LessonController {
     }
 
     @GetMapping("/findall")
-    public Stream<LessonDTO> findAll() {
+    public List<LessonDTO> findAll() {
         return lessonService.findAll();
     }
 

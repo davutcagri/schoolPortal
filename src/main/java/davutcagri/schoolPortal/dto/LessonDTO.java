@@ -2,14 +2,17 @@ package davutcagri.schoolPortal.dto;
 
 import lombok.Data;
 
-import java.util.stream.Stream;
+import java.util.List;
 
 @Data
 public class LessonDTO {
 
     private String name;
     private String teacher;
-    private Stream<String> students;
-    private Stream<NoteDTO> notes;
+    private Double averageMark;
+    private List<String> students;
+    private List<String> passedStudentsName;
+    private List<String> failedStudentName;
+    private List<NoteDTO> notes;
 
 }

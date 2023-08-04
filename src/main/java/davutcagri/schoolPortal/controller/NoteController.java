@@ -6,7 +6,7 @@ import davutcagri.schoolPortal.response.GenericResponse;
 import davutcagri.schoolPortal.service.NoteService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.stream.Stream;
+import java.util.List;
 
 @RestController
 @RequestMapping("/note")
@@ -24,7 +24,7 @@ public class NoteController {
     }
 
     @GetMapping("/findall")
-    public Stream<NoteDTO> findAll() {
+    public List<NoteDTO> findAll() {
         return noteService.findAll();
     }
 

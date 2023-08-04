@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.stream.Stream;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -12,6 +12,6 @@ import java.util.stream.Stream;
 public class TeacherDTO {
 
     private String name;
-    private Stream<String> lessons;
+    private List<LessonDTO> lessons;
 
 }

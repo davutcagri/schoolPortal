@@ -1,12 +1,13 @@
 package davutcagri.schoolPortal.controller;
 
 import davutcagri.schoolPortal.dto.TeacherDTO;
+import davutcagri.schoolPortal.exception.TeacherNotFoundException;
 import davutcagri.schoolPortal.model.Teacher;
 import davutcagri.schoolPortal.response.GenericResponse;
 import davutcagri.schoolPortal.service.TeacherService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.stream.Stream;
+import java.util.List;
 
 @RestController
 @RequestMapping("/teacher")
@@ -24,7 +25,7 @@ public class TeacherController {
     }
 
     @GetMapping("/findall")
-    public Stream<TeacherDTO> findAll() {//Stream kaldırılacak
+    public List<TeacherDTO> findAll() throws TeacherNotFoundException {//Stream kaldırılacak
         return teacherService.findAll();
     }
 
